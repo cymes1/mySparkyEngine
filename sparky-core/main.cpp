@@ -9,6 +9,7 @@
 #include "src/graphics/buffers/vertexArray.h"
 #include "src/graphics/shader.h"
 #include "src/graphics/batchrenderer2d.h"
+#include "src/graphics/simple2drenderer.h"
 #include "src/graphics/renderable2d.h"
 #include "src/graphics/sprite.h"
 #include "src/utils/timer.h"
@@ -26,8 +27,6 @@ int main()
 	Shader shader("shaders/basic.vert", "shaders/basic.frag");
 	shader.enable();
 	shader.setUniformMat4("pr_matrix", ortho);
-	shader.setUniform2f("light_pos", vec2(4.0f, 1.5f));
-	shader.setUniform4f("colour", vec4(0.2f, 0.3f, 0.8f, 1.0f));
 
 	std::vector<Renderable2D*> sprites;
 	srand(time(NULL));
@@ -37,27 +36,29 @@ int main()
 	
 	BatchRenderer2D renderer;
 
-	for(float y = 0.0f; y < 9.0f; y+= 0.2)
+	for(float y = 0.0f; y < 9.0f; y+= 0.15)
 	{
-		for(float x = 0.0f; x < 16.0f; x+= 0.2)
+		for(float x = 0.0f; x < 16.0f; x+= 0.15)
 		{
 			sprites.push_back(new Sprite(x, y, 0.1f, 0.1f, Math::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 		}
 	}
 
 	Timer timer;
+	int framesPerSecond = 0;
 	double t = 0;
+	std::cout << sprites.size() << std::endl;
 
 	while(!window.isClosed())
 	{
-		//timer.reset();
+		timer.reset();
 		window.clear();
 
 		double x, y;
 		window.mousePosition(x, y);
 		shader.setUniform2f("light_pos", vec2((float)(x * 16.0f / 960.0f), (float)(9.0f - y * 9.0f / 540.0f)));
 		renderer.begin();
-		for(int i = 0; i < sprites.size(); i++)
+		for(unsigned int i = 0; i < sprites.size(); i++)
 		{
 			renderer.submit(sprites[i]);
 		}
@@ -66,13 +67,16 @@ int main()
 
 		window.update();
 
-		t = timer.elapsed();
-		if(t >= 1.0)
+		t += timer.deltaTime();
+		++framesPerSecond;
+		if(t >= 1)
 		{
-			std::cout << "tick!" << std::endl;
-			timer.reset();
+			t = 0;
+			printf("FPS = %d\n", framesPerSecond);
+			framesPerSecond = 0;
 		}
 	}
+
 
 	return 0;
 }

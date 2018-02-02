@@ -73,6 +73,7 @@ namespace Sparky { namespace Graphics
 		glfwSetKeyCallback(m_window, key_callback);
 		glfwSetMouseButtonCallback(m_window, mouse_button_callback);
 		glfwSetCursorPosCallback(m_window, cursor_position_callback);
+		glfwSwapInterval(0);
 
 		if(glewInit() != GLEW_OK)
 		{

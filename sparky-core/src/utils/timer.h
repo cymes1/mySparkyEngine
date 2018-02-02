@@ -28,14 +28,14 @@ namespace Sparky {
 		}
 
 
-		double elapsed()
+		double deltaTime()
 		{
 			m_currentTime = steady_clock::now();
 
 			steady_clock::duration d = m_currentTime - m_startTime;
 			
-			double a = duration_cast<milliseconds>(d).count() * milliseconds::period::num / milliseconds::period::den;
-
+			double a = duration_cast<microseconds>(d).count() / 1000000.0f;
+			
 			return a;
 		}
 	};
