@@ -60,6 +60,10 @@ namespace Sparky { namespace Graphics
 			return false;
 		}
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 		m_window = glfwCreateWindow(m_width, m_height, m_name.c_str(), NULL, NULL);
 		if(!m_window)
 		{
@@ -75,9 +79,13 @@ namespace Sparky { namespace Graphics
 		glfwSetCursorPosCallback(m_window, cursor_position_callback);
 		glfwSwapInterval(0);
 
-		if(glewInit() != GLEW_OK)
+		GLenum err;
+		err = glewInit();
+
+		if(err != GLEW_OK)
 		{
 			cout << "Failed to initialize GLEW" << endl;
+			cout << glewGetErrorString(err) << endl;
 			return false;
 		}
 		

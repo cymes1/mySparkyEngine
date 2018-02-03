@@ -15,3 +15,12 @@ TARGET_LINK_LIBRARIES (sparky ${OPENGL_gl_LIBRARY})
 TARGET_LINK_LIBRARIES (sparky graphics)
 TARGET_LINK_LIBRARIES (sparky math)
 TARGET_LINK_LIBRARIES (sparky buffers)
+
+CONFIGURE_FILE(
+	${CMAKE_SOURCE_DIR}/sparky-core/src/shaders/basic.vert
+	${CURRENT_CMAKE_BINARY_DIR}/shaders/basic.vert
+	COPYONLY)
+CONFIGURE_FILE(
+	${CMAKE_SOURCE_DIR}/sparky-core/src/shaders/basic.frag
+	${CURRENT_CMAKE_BINARY_DIR}/shaders/basic.frag
+	COPYONLY)
