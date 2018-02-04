@@ -1,6 +1,7 @@
 #ifndef BATCHRENDERER2D_H
 #define BATCHRENDERER2D_H
 
+#include <cstddef>
 #include "buffers/vertexArray.h"
 #include "renderer2d.h"
 #include "renderable2d.h"

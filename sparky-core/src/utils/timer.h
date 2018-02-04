@@ -28,7 +28,7 @@ namespace Sparky {
 		}
 
 
-		double deltaTime()
+		double elapsed()
 		{
 			m_currentTime = steady_clock::now();
 

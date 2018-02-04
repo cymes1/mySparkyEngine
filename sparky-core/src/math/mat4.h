@@ -1,6 +1,7 @@
 #ifndef MAT4_H
 #define MAT4_H
 
+#include <cstring>
 #include "math.h"
 
 namespace Sparky { namespace Math {

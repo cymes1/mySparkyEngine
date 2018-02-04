@@ -51,8 +51,12 @@ int main()
 
 	while(!window.isClosed())
 	{
-		timer.reset();
 		window.clear();
+
+		mat4 mat = mat4::translation(vec3(5, 5, 5));
+		mat = mat * mat4::rotation(timer.elapsed() * 100, vec3(0, 0, 1));
+		mat = mat * mat4::translation(vec3(-5, -5, -5));
+		shader.setUniformMat4("ml_matrix", mat);
 
 		double x, y;
 		window.mousePosition(x, y);
@@ -67,16 +71,19 @@ int main()
 
 		window.update();
 
-		t += timer.deltaTime();
 		++framesPerSecond;
-		if(t >= 1)
+		if(timer.elapsed() - t >= 1)
 		{
-			t = 0;
+			++t;
 			printf("FPS = %d\n", framesPerSecond);
 			framesPerSecond = 0;
 		}
 	}
 
+	for(unsigned int i = 0; i < sprites.size(); i++)
+	{
+		delete sprites[i];
+	}
 
 	return 0;
 }
