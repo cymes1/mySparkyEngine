@@ -49,6 +49,12 @@ namespace Sparky { namespace Graphics {
 		++m_buffer;
 
 		m_indexCount += 6;
+		/*if(m_indexCount >= 5995)
+		{
+			end();
+			flush();
+			begin();
+		}*/
 	}
 
 
@@ -64,7 +70,7 @@ namespace Sparky { namespace Graphics {
 		glBindVertexArray(m_vao);
 		m_ibo->bind();
 
-		glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_SHORT, NULL);
+		glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, NULL);
 
 		m_ibo->unbind();
 		glBindVertexArray(0);
@@ -89,7 +95,7 @@ namespace Sparky { namespace Graphics {
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		GLushort indices[RENDERER_INDICES_SIZE];
+		GLuint indices[RENDERER_INDICES_SIZE];
 		int offset = 0;
 		for(int i = 0; i < RENDERER_INDICES_SIZE; i+= 6)
 		{

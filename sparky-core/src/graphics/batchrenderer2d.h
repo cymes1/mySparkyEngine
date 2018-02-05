@@ -11,7 +11,7 @@ namespace Sparky { namespace Graphics {
 	class BatchRenderer2D : public Renderer2D
 	{
 	private:
-		const int RENDERER_MAX_SPRITES = 10000;
+		const int RENDERER_MAX_SPRITES = 60000;
 		const int RENDERER_VERTEX_SIZE = sizeof(VertexData);
 		const int RENDERER_SPRITE_SIZE = RENDERER_VERTEX_SIZE * 4;
 		const int RENDERER_BUFFER_SIZE = RENDERER_SPRITE_SIZE * RENDERER_MAX_SPRITES;
@@ -19,18 +19,18 @@ namespace Sparky { namespace Graphics {
 		const int SHADER_VERTEX_INDEX = 0;
 		const int SHADER_COLOR_INDEX = 1;
 
+		GLuint m_vbo;
 		GLuint m_vao;
 		IndexBuffer* m_ibo;
-		GLuint m_vbo;
 		GLsizei m_indexCount;
 		VertexData* m_buffer;
 		
 	public:
 		BatchRenderer2D();
 		~BatchRenderer2D();
-		void begin();
+		void begin() override;
 		void submit(const Renderable2D* renderable) override;
-		void end();
+		void end() override;
 		void flush() override;
 
 	private:

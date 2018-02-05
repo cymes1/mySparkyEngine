@@ -13,8 +13,9 @@ TARGET_LINK_LIBRARIES (sparky glfw)
 TARGET_LINK_LIBRARIES (sparky ${OPENGL_gl_LIBRARY})
 
 TARGET_LINK_LIBRARIES (sparky graphics)
-TARGET_LINK_LIBRARIES (sparky math)
 TARGET_LINK_LIBRARIES (sparky buffers)
+TARGET_LINK_LIBRARIES (sparky layers)
+TARGET_LINK_LIBRARIES (sparky math)
 
 CONFIGURE_FILE(
 	${CMAKE_SOURCE_DIR}/sparky-core/src/shaders/basic.vert
