@@ -35,26 +35,22 @@ namespace Sparky { namespace Graphics {
 
 		unsigned int c = a << 24 | b << 16 | g << 8 | r;
 
+		const Math::vec3& finalPosition = *m_transformationBack * position;
+
 		m_buffer->vertex = position;
 		m_buffer->color = c;
 		++m_buffer;
-		m_buffer->vertex = Math::vec3(position.x, position.y + size.y, position.z);
+		m_buffer->vertex = Math::vec3(finalPosition.x, finalPosition.y + size.y, finalPosition.z);
 		m_buffer->color = c;
 		++m_buffer;
-		m_buffer->vertex = Math::vec3(position.x + size.x, position.y + size.y, position.z);
+		m_buffer->vertex = Math::vec3(finalPosition.x + size.x, finalPosition.y + size.y, finalPosition.z);
 		m_buffer->color = c;
 		++m_buffer;
-		m_buffer->vertex = Math::vec3(position.x + size.x, position.y, position.z);
+		m_buffer->vertex = Math::vec3(finalPosition.x + size.x, finalPosition.y, finalPosition.z);
 		m_buffer->color = c;
 		++m_buffer;
 
 		m_indexCount += 6;
-		/*if(m_indexCount >= 5995)
-		{
-			end();
-			flush();
-			begin();
-		}*/
 	}
 
 
