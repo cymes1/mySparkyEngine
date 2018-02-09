@@ -10,6 +10,7 @@
 #include "src/graphics/renderable2d.h"
 #include "src/graphics/sprite.h"
 #include "src/graphics/layers/tilelayer.h"
+#include "src/graphics/layers/group.h"
 #include "src/utils/timer.h"
 
 using namespace Sparky;
@@ -27,14 +28,19 @@ int main()
 
 	TileLayer layer(shader);
 
-	srand(time(NULL));
+	/*srand(time(NULL));
 	for(float y = -9.0f; y < 9.0f; y += 0.1f)
 	{
 		for(float x = -16.0f; x < 16.0f; x += 0.1f)
 		{
 			layer.add(new Sprite(x, y, 0.08f, 0.08f, vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
 		}
-	}
+	}*/
+
+	Group* group = new Group(mat4::translation(vec3(-15.0f, 5.0f, 0.0f)));
+	group->add(new Sprite(0.0f, 0.0f, 6, 3, Math::vec4(1, 1, 1, 1)));
+	group->add(new Sprite(0.5f, 0.5f, 5.0f, 2.0f, Math::vec4(1, 0, 1, 1)));
+	layer.add(group);
 
 	Timer timer;
 	int framesPerSecond = 0;

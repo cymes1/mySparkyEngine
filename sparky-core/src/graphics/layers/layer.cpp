@@ -29,7 +29,7 @@ namespace Sparky { namespace Graphics {
 
 		m_renderer->begin();
 		for(const Renderable2D* renderable : m_renderables)
-			m_renderer->submit(renderable);
+			renderable->submit(m_renderer);
 		m_renderer->end();
 
 		m_renderer->flush();

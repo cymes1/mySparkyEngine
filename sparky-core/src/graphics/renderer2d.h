@@ -4,9 +4,11 @@
 #include <GL/glew.h>
 #include <vector>
 #include "../math/math.h"
-#include "renderable2d.h"
+
 
 namespace Sparky { namespace Graphics {
+
+	class Renderable2D;
 
 	class Renderer2D
 	{
